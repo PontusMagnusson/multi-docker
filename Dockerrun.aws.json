@@ -1,0 +1,34 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "pontusm/multi-fib-client",
+            "hostname": "client",
+            "essential": false
+        },
+        {
+            "name": "api",
+            "image": "pontusm/multi-fib-api",
+            "hostname": "api",
+            "essential": false
+        },
+        {
+            "name": "worker",
+            "image": "pontusm/multi-fib-worker",
+            "essential": false
+        },
+        {
+            "name": "nginx",
+            "image": "pontusm/multi-fib-nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort": 80,
+                    "containerPort": 80
+                }
+            ],
+            "links": [ "client", "api" ]
+        }
+    ]
+}
